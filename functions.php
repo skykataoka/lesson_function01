@@ -55,6 +55,7 @@ function is_future_date($target_date) {
  * @return string エスケープされた HTML 文字列
  */
 function html_escape($html) {
+  return htmlspecialchars($html,ENT_QUOTES,'utf-8');
 }
 
 /**
@@ -70,6 +71,7 @@ function html_escape($html) {
  * @return int 消費税を含めた金額(少数以下切り捨て)
  */
 function get_tax_price($price) {
+  return floor($price* 1.08);
 }
 
 /**
@@ -104,6 +106,9 @@ function get_tax_price($price) {
  * @return bool ファイル書き込みに成功した時 true, 失敗した時 false
  */
 function write_log($message, $level) {
+  $fp = fopen("{$level}.log","a")
+  fwrite($fp, date(YYYY-mm-DD HH:MM:SS).$message);
+  fclose($fp);
 }
 
 /**
@@ -142,6 +147,12 @@ function write_log($message, $level) {
  * @return array 指定されたカラムの値の配列
  */
 function array_column(array $data, $column) {
+  foreach ($data as $dat) {
+    foreach ($dat as $column => $value) {
+     return $value;
+    }
+
+  }
 }
 
 
